@@ -259,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollTrigger: {
       trigger: '#svg-container',
       start: 'top top',
+      pin: true,
     }
   })
 
