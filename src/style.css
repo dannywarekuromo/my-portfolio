@@ -29,7 +29,7 @@
   --title-tf: "Oswald", san-serif;
   --body-tf: "Montserrat", san-serif;
   /* font size: title */
-  --display-1: 44vw;
+  --display-1: 42.5vw;
   --title-1: 5rem;
   --title-2: 1.2rem;
   --title-3: 2.5rem;
@@ -508,7 +508,11 @@ button {
   /* hidden */
   /* clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); */
   /* reveal */
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.clip-circle {
+  clip-path: circle(50% at 50% 50%);
 }
 
 /* preloader */
@@ -534,6 +538,7 @@ button {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(-360deg);
   }
@@ -613,9 +618,11 @@ button {
   0% {
     transform: translateY(-15px);
   }
+
   50% {
     transform: translateY(-5px)
   }
+
   100% {
     transform: translateY(-15px);
   }
@@ -756,6 +763,7 @@ button {
   50% {
     transform: rotate(-5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
@@ -808,9 +816,11 @@ button {
     display: grid;
     grid-template-columns: repeat(2, 50%);
   }
+
   .experience-card .period {
     display: block;
   }
+
   .experience-plot {
     grid-column: 2/3;
     width: 100%;
@@ -856,7 +866,9 @@ button {
 }
 
 @media (min-width:602px) {
-  #testimony-1 ,#testimony-3 {
+
+  #testimony-1,
+  #testimony-3 {
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: repeat(2, fit-content);
@@ -866,6 +878,7 @@ button {
   .testimony {
     grid-column: 2/3;
   }
+
   .testiphant {
     grid-column: 2/3;
   }
@@ -897,7 +910,7 @@ button {
 
 /* footer */
 .footer-panel {
- text-align: center;
+  text-align: center;
 }
 
 #footer-indicator {
@@ -911,7 +924,7 @@ button {
 #footer-indicator a {
   grid-column: 2/2;
   animation: bouncy 3s linear infinite;
-   margin-top: var(--ws-2);
+  margin-top: var(--ws-2);
 }
 
 @media (min-width: 375px) {
@@ -994,7 +1007,7 @@ button {
 }
 
 .text-delimiter {
-  width: minmax(296px,320px);
+  width: minmax(296px, 320px);
 }
 
 .text-indent {
@@ -1018,7 +1031,7 @@ button {
 }
 
 .link-pry:hover::before {
- transform: translateX(800%);
+  transform: translateX(800%);
 }
 
 .link-sec::before {
@@ -1034,7 +1047,7 @@ button {
 }
 
 .link-sec:hover::before {
- transform: translateX(8000%);
+  transform: translateX(8000%);
 }
 
 .link-sub {
@@ -1057,7 +1070,7 @@ button {
 }
 
 .link-sub:hover::before {
- width: 100%
+  width: 100%
 }
 
 .link-sup::before {
@@ -1072,7 +1085,7 @@ button {
 }
 
 .link-sup:hover::before {
- width: 100%
+  width: 100%
 }
 
 .no-pointer {
@@ -1080,10 +1093,10 @@ button {
 }
 
 @media (min-width: 768px) {
- .link-sec::before {
-  width: 10px;
-  height: 8px;
-} 
+  .link-sec::before {
+    width: 10px;
+    height: 8px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1139,6 +1152,7 @@ button {
 .fit-content {
   width: fit-content;
 }
+
 .no-wrap {
   white-space: nowrap;
 }

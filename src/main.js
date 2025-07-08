@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   preloaderTl.from('.preloader-img', {
     scale: 0.5,
-    // skewY: '-30deg',
     duration: 1,
     stagger: 0.5,
     onComplete: preloaderEnd,
@@ -31,11 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     heroTl.from('#hero-title', {
       opacity: 0,
       yPercent: 50,
-      duration: 0.5
+      // duration: 0.5
     })
       .from('.header-item', {
-        opacity: 0,
-        // stagger: 0.5,
+        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
       .from('#hero-image', {
         opacity: 0,
@@ -43,16 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
         scale: 0.5,
       })
       .from('.value-prop', {
-        opacity: 0,
+        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
       .from('.address-prop', {
-        opacity: 0,
+        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
       .from('.hero-svg-branch', {
         opacity: 0,
       })
       .from('#indicator-text', {
-        opacity: 0,
+        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
   }
 
@@ -124,20 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  markedTexts2.forEach(text => {
-    gsap.from(text, {
-      scrollTrigger: {
-        trigger: text,
-        scrub: true,
-        start: '50% 85%',
-        end: '50% 50%',
-        stagger: 0.5,
-      },
-      backgroundSize: '0% 100%',
-      color: '#e3dcdc',
-    })
-  })
-
   /////// about sequence
 
   /////// services sequence
@@ -149,26 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  gsap.from('.service-copy', {
-    scrollTrigger: {
-      trigger: '.service-copy',
-      start: 'top 80%',
-    },
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.5,
+  servicesTl.from('.service-copy', {
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
   })
-
-  servicesTl.from('.service-line', {
-    width: 0,
-    stagger: 0.5,
-  }).from('.service-heading', {
-    opacity: 0,
-    stagger: 0.5,
-  }, '<').from('.service-specs', {
-    opacity: 0,
-    stagger: 0.5,
-  }, '<')
+    .from('.service-line', {
+      width: 0,
+      stagger: 0.5,
+    }).from('.service-heading', {
+      opacity: 0,
+      stagger: 0.5,
+    }).from('.service-specs-text', {
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+      stagger: 0.5,
+    }, '<')
 
   /////// services emote
   const serviceCards = gsap.utils.toArray('.service-card');
@@ -177,14 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('mouseenter', () => {
       card.classList.add('active');
       gsap.to(card.children[2], {
-        opacity: 1,
-        delay: 0.5,
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
       })
     })
     card.addEventListener('mouseleave', () => {
       card.classList.remove('active');
       gsap.to(card.children[2], {
-        opacity: 0,
+        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
     })
   })
@@ -214,43 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
       x: -50,
       opacity: 0,
       duration: 0.8,
-    })
-  })
-
-  /////// experience sequence
-  const experienceTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#experience-intro',
-      start: 'top 80%',
-    }
-  })
-
-  experienceTl.from('.experience-copy', {
-    stagger: 0.5,
-  }).from('.experience-line', {
-    width: 0,
-    stagger: 0.5
-  }).from('.period', {
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.5,
-  }, '<').from('.experience-heading', {
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.5
-  }, '<')
-
-  /////// svg emote
-  const svgGroup = gsap.utils.toArray('.svg-icon');
-
-  svgGroup.forEach(svg => {
-    gsap.from(svg, {
-      scrollTrigger: {
-        trigger: svg,
-        start: 'top 90%',
-        end: 'top 75%',
-      },
-      opacity: 0,
     })
   })
 
@@ -286,4 +225,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  /////// experience sequence
+  const experienceTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#experience-intro',
+      start: 'top 80%',
+    }
+  })
+
+  experienceTl.from('.experience-copy', {
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+  }).from('.experience-line', {
+    width: 0,
+    stagger: 0.5
+  }).from('.period', {
+    opacity: 0,
+    stagger: 0.5,
+  }, '<').from('.experience-heading', {
+    opacity: 0,
+    stagger: 0.5
+  }, '<').from('.experience-specs-text', {
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+    stagger: 0.5,
+  }, '<')
+
+
+  ////////// marked text 2
+  markedTexts2.forEach(text => {
+    gsap.from(text, {
+      scrollTrigger: {
+        trigger: text,
+        scrub: true,
+        start: '50% 85%',
+        end: '50% 50%',
+        stagger: 0.5,
+      },
+      backgroundSize: '0% 100%',
+      color: '#e3dcdc',
+    })
+  })
+
+  ////// testimonial sequence
+  const testimonialTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.testimonial',
+      start: 'top 80%',
+    }
+  })
+
+  testimonialTl.from('.testimonial-svg > svg', {
+    opacity: 0,
+  }).from('.testiphant-text', {
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+    stagger: 0.5,
+  })
+
+  ////////// contact sequence
+  gsap.from('#contact-cta a', {
+    scrollTrigger: {
+      trigger: '#contact-cta a',
+      start: 'top 80%',
+    },
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+  })
+
+  /////////// footer sequence 
+  const footerTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#footer',
+      start: 'top 80%',
+    }
+  })
+
+  footerTl.from('.footer-text', {
+    opacity: 0,
+  }).from('.footer-link', {
+    opacity: 0,
+  })
 })
