@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /////////// preloader sequence
   const preloaderScreen = document.querySelector('#preloader');
 
+  document.body.style.overflow = "hidden";
+  document.body.style.backgroundColor = "#050505";
+
   let preloaderTl = gsap.timeline();
 
   preloaderTl.from('.preloader-img', {
@@ -24,13 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function preloaderEnd() {
     preloaderScreen.classList.add('hide-page');
 
+    document.body.style.overflow = "visible";
+    document.body.style.backgroundColor = "#e3dcdc";
+
     ////// hero sequence
     let heroTl = gsap.timeline({ delay: 1 });
 
     heroTl.from('#hero-title', {
-      opacity: 0,
-      yPercent: 50,
-      // duration: 0.5
+      // opacity: 0,
+      yPercent: 150,
+      duration: 0.5
     })
       .from('.header-item', {
         clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
@@ -39,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         duration: 1,
         scale: 0.5,
-      })
+      }, '0.1')
       .from('.value-prop', {
         clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
       })
@@ -48,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .from('.hero-svg-branch', {
         opacity: 0,
-      })
+      }, '<')
       .from('#indicator-text', {
         clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      })
+      }, '<')
   }
 
   //////////// mouse tracker
@@ -122,13 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  /////// about sequence
-
   /////// services sequence
   const servicesTl = gsap.timeline({
     scrollTrigger: {
       trigger: '.services',
       start: 'top 80%',
+      stagger: 0.5,
       // end: '50% 50%',
     }
   });
@@ -138,13 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
   })
     .from('.service-line', {
       width: 0,
-      stagger: 0.5,
     }).from('.service-heading', {
       opacity: 0,
-      stagger: 0.5,
-    }).from('.service-specs-text', {
+    }, '<').from('.service-specs-text', {
       clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      stagger: 0.5,
     }, '<')
 
   /////// services emote
@@ -153,15 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
   serviceCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
       card.classList.add('active');
-      gsap.to(card.children[2], {
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
-      })
     })
     card.addEventListener('mouseleave', () => {
       card.classList.remove('active');
-      gsap.to(card.children[2], {
-        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      })
     })
   })
 
@@ -222,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         delay: 0.5,
       })
+      document.querySelector('#vessel').classList.add('sway');
     }
   })
 
@@ -230,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollTrigger: {
       trigger: '#experience-intro',
       start: 'top 80%',
+      stagger: 0.5,
     }
   })
 
@@ -237,16 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
     clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
   }).from('.experience-line', {
     width: 0,
-    stagger: 0.5
   }).from('.period', {
     opacity: 0,
-    stagger: 0.5,
   }, '<').from('.experience-heading', {
     opacity: 0,
-    stagger: 0.5
   }, '<').from('.experience-specs-text', {
     clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-    stagger: 0.5,
   }, '<')
 
 
@@ -290,16 +284,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   /////////// footer sequence 
-  const footerTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#footer',
-      start: 'top 80%',
-    }
-  })
 
-  footerTl.from('.footer-text', {
+
+  gsap.from('.footer-text', {
+    scrollTrigger: {
+      trigger: '.footer-text',
+      start: 'top 80%',
+    },
     opacity: 0,
-  }).from('.footer-link', {
-    opacity: 0,
+  })
+  gsap.from('.footer-link', {
+    scrollTrigger: {
+      trigger: '.footer-link',
+      start: 'top 80%',
+    },
+    clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
   })
 })

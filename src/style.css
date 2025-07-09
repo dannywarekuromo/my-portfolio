@@ -18,7 +18,7 @@
   /* color palette: solid colors */
   --dorminant-clr: #e3dcdc;
   --complimentary-clr: #050505;
-  --accent-clr: #630000;
+  --accent-clr: #9c0404;
   --splash-clr: #ffc310;
   /* tints */
   --tint-1: #ffffff;
@@ -92,6 +92,10 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
+}
+
+#app.preloading {
+  display: none;
 }
 
 html,
@@ -579,11 +583,13 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: repeat(3, fit-content);
+  min-height: 85vh;
 }
 
 .hero-prop {
   grid-row: 2/3;
   grid-column: 1/3;
+  margin-bottom: var(--ws-4);
 }
 
 .hero-heading {
@@ -631,6 +637,7 @@ button {
 @media (min-width: 768px) {
   #hero {
     grid-template-rows: repeat(2, 1fr);
+    /* min-height: 100vh; */
   }
 
   .hero-heading {
@@ -642,6 +649,7 @@ button {
     grid-row: 2/3;
     display: flex;
     align-items: end;
+    margin-bottom: 0px;
   }
 
   .hero-img,
@@ -730,7 +738,12 @@ button {
 
   .service-specs {
     text-align: left;
-    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+
+  .service-card.active .service-specs {
+    clip-path: polygon(0 0, 500% 100%, 100% 100%, 0 100%);
   }
 }
 
