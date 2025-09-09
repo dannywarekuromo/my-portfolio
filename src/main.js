@@ -1,8 +1,10 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import MorphSVGPlugin from 'gsap/MorphSVGPlugin';
+
 import Lenis from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
 document.addEventListener('DOMContentLoaded', () => {
   const lenis = new Lenis({
@@ -17,12 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let preloaderTl = gsap.timeline();
 
-  preloaderTl.from('.preloader-img', {
+  preloaderTl.from('.preloader-text', {
+    opacity: 0,
+    duration: 1.5,
+  }).from('.preloader-img', {
+    opacity: 0,
     scale: 0.5,
     duration: 1,
     stagger: 0.5,
+  }).from('.preloader-bar', {
+    width: 0,
+    duration: 5,
     onComplete: preloaderEnd,
-  })
+  }, '<')
 
   function preloaderEnd() {
     preloaderScreen.classList.add('hide-page');
@@ -33,25 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ////// hero sequence
     let heroTl = gsap.timeline({ delay: 1 });
 
-    heroTl.from('#hero-title', {
-      // opacity: 0,
+    heroTl.from('.header-item', {
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+    }).from('#hero-title', {
       yPercent: 150,
       duration: 0.5
-    })
-      .from('.header-item', {
-        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      })
-      .from('#hero-image', {
-        opacity: 0,
-        duration: 1,
-        scale: 0.5,
-      }, '0.1')
-      .from('.value-prop', {
-        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      })
-      .from('.address-prop', {
-        clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
-      })
+    }).from('#hero-image', {
+      opacity: 0,
+      scale: 0.5,
+    }).from('.value-prop', {
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%',
+    }, '<')
       .from('.hero-svg-branch', {
         opacity: 0,
       }, '<')
@@ -160,6 +161,87 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.remove('active');
     })
   })
+
+  /////// bridge sequence
+  const svgBridge = document.querySelector('.bridge');
+  const darkWaveTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: svgBridge,
+      start: 'top 90%',
+      // end: 'bottom 60%',
+      scrub: true,
+    },
+  })
+  const midWaveTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: svgBridge,
+      start: 'top 90%',
+      // end: 'bottom 50%',
+      scrub: true,
+    },
+  })
+  const lightWaveTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: svgBridge,
+      start: 'top 90%',
+      // end: 'bottom 50%',
+      scrub: true,
+    },
+  })
+
+  darkWaveTL.to('.dark-wave', {
+    attr: {
+      d: "M0 0V580H1315V0C1315 0 1219.22 52.1992 1048 168.5C759.085 364.749 0 0 0 0Z"
+    }
+  }).to('.dark-wave', {
+    attr: {
+      d: "M0 0V580H1315V0C1315 0 729.839 510.053 433 263C117 0 0 0 0 0Z"
+    }
+  }).to('.dark-wave', {
+    attr: {
+      d: "M0 0.999987V581H1315V0.999987C1315 0.999987 917.5 -23.5001 479.5 243.5C181.278 425.293 0 0.999987 0 0.999987Z" 
+    }
+  })
+  
+  midWaveTL.to('.mid-wave', {
+    attr: {
+      d: "M0 0V580H1315V0C1315 0 1110.5 69.5 937.5 170.5C709.716 303.484 0 0 0 0Z"
+    }
+  }).to('.mid-wave', {
+    attr: {
+      d: "M0 0V580H1315V0C1315 0 874.297 286 667 286C423.5 286 0 0 0 0Z" 
+    }
+  }).to('.mid-wave', {
+    attr: {
+      d: "M0 0V580H1315V0C1315 0 810.317 0 415.5 230.5C187.716 363.484 0 0 0 0Z"
+    }
+  }).to('.mid-wave', {
+    attr: {
+      d: "M0 0.5V579H1309.5V0.5C1309.5 0.5 939 82 701.5 82C450.781 82 0 0.5 0 0.5Z"
+    }
+  })
+
+
+  
+  lightWaveTL.to('.light-wave', {
+    attr: {
+      d: "M0 59.4999V570H1315V0C1315 0 912 249 575 139.5C273.227 41.4462 0 59.4999 0 59.4999Z"
+    }
+  }).to('.light-wave', {
+    attr: {
+      d: "M0 59.4996V569.999H1315V-0.000244141C1315 -0.000244141 921.5 208.5 647 252C333.608 301.663 0 59.4996 0 59.4996Z"
+    }
+  }).to('.light-wave', {
+    attr: {
+      d: "M0 59.4999V570H1315V0C1315 0 1116.5 379.5 352 220.5C79.7701 163.882 0 59.4999 0 59.4999Z"
+    }
+  }).to('.light-wave', {
+    attr: {
+      d: "M0 78.0001V513H1309.5V78.0001C1309.5 78.0001 1149.31 -80.8227 892 55.5C480.333 273.599 0 78.0001 0 78.0001Z"
+    }
+  })
+
+
 
   ////// work sequence
   const mottoTexts = gsap.utils.toArray('.motto-copy');
@@ -284,8 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   /////////// footer sequence 
-
-
   gsap.from('.footer-text', {
     scrollTrigger: {
       trigger: '.footer-text',

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
 @font-face {
   font-family: "Montserrat";
   src: url(../assets/fonts/Montserrat-VariableFont_wght.ttf);
@@ -7,6 +9,7 @@
   font-family: "Oswald";
   src: url(../assets/fonts/Oswald-VariableFont_wght.ttf);
 }
+
 
 * {
   padding: 0;
@@ -109,6 +112,11 @@ img,
 svg {
   max-width: 100%;
   object-fit: cover;
+}
+
+h1,h2,h3,p,a {
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 a {
@@ -524,7 +532,10 @@ button {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   transition: all 0.8s;
-  /* transform: translateY(-100%); */
+}
+
+.preloader-images {
+  gap: var(--ws-3)
 }
 
 .preloader-img {
@@ -533,27 +544,16 @@ button {
   transform: scaleX(-1);
 }
 
-.preloader-stick {
-  transform-origin: center center;
-  animation: spin-stick 3.5s forwards infinite;
+.preloader-bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--splash-clr);
+  margin-top: var(--ws-3);
+  border-radius: 10px;
 }
 
-@keyframes spin-stick {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-
-@media (min-width: 768px) {
-  .preloader-images {
-    width: 55%;
-    position: absolute;
-    right: 0;
-  }
+.preloader-panel:nth-child(3) p {
+  right: 0px;
 }
 
 /* header */
@@ -583,7 +583,7 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 50%);
   grid-template-rows: repeat(3, fit-content);
-  min-height: 85vh;
+  min-height: 100vh;
 }
 
 .hero-prop {
@@ -1005,7 +1005,7 @@ button {
   background-image: url('../assets/images/overlay (1).gif');
   background-position: contain;
   background-repeat: repeat;
-  opacity: 0.05;
+  opacity: 0.08;
 }
 
 #mouse-tracker {
@@ -1078,7 +1078,7 @@ button {
   bottom: 0px;
   left: 0px;
   width: 0%;
-  height: 1px;
+  height: 0.5px;
   background-color: var(--dorminant-clr);
 }
 
@@ -1092,8 +1092,8 @@ button {
   position: absolute;
   bottom: 0px;
   left: 0px;
-  width: 0%;
-  height: 1px;
+  width: 9px;
+  height: 0.5px;
   background-color: var(--complimentary-clr);
 }
 
@@ -1103,6 +1103,10 @@ button {
 
 .no-pointer {
   cursor: default;
+}
+
+.bridge {
+  background-image: linear-gradient(var(--dorminant-clr), var(--complimentary-clr));
 }
 
 @media (min-width: 768px) {
